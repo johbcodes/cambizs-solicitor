@@ -55,17 +55,8 @@
                                 <img class="title-img img-responsive" src="{{ asset('user/img/practice/img-13.jpg') }}"
                                     alt="Image">
                                 <div class="sectionTitle text-left">
-                                    <h2>{{ $area }}</h2>
-                                    <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a
-                                        piece of classical Latin literature from 45 BC, making it over 2000 years old.
-                                        Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked
-                                        up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and
-                                        going through the cites of the word in classical literature, discovered the
-                                        undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de
-                                        Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45
-                                        BC. This book is a treatise on the theory of ethics, very popular during the
-                                        Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes
-                                        from a line in section 1.10.32.</p>
+                                    <h2>{{ $area->name }}</h2>
+                                    <p>{{ $area->description }}.</p>
                                     <div class="row">
                                         <div class="col-sm-8 col-xs-12">
                                             <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below
@@ -125,86 +116,35 @@
                                     <h2>Attorneys in this area</h2>
                                 </div>
                                 <div class="row">
-                                    <div class="col-sm-4 col-xs-12">
-                                        <div class="teamContent text-center">
-                                            <div class="teamImage">
-                                                <img src="{{ asset('user/img/home/team4.jpg') }}" alt="img">
-                                                <div class="overlay">
-                                                    <a href="#"></a>
+                                    @foreach ($solicitors as $solicitor)
+                                        <div class="col-sm-4 col-xs-12">
+                                            <div class="teamContent text-center">
+                                                <div class="teamImage">
+                                                    <img src="{{ asset('user/img/home/team4.jpg') }}" alt="img">
+                                                    <div class="overlay">
+                                                        <a href="#"></a>
+                                                    </div>
+                                                </div>
+                                                <div class="teamInfo">
+                                                    <h3><a href="#">{{ $solicitor->user->name }}</a></h3>
+                                                    <p>Lawyer &amp ceo</p>
+                                                    <ul class="list-inline">
+                                                        <li><a href="#"><i class="fa fa-facebook"
+                                                                    aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-twitter"
+                                                                    aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-rss"
+                                                                    aria-hidden="true"></i></a>
+                                                        </li>
+                                                        <li><a href="#"><i class="fa fa-linkedin"
+                                                                    aria-hidden="true"></i></a></li>
+                                                        <li><a href="#"><i class="fa fa-skype"
+                                                                    aria-hidden="true"></i></a></li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <div class="teamInfo">
-                                                <h3><a href="#">Mark Brown</a></h3>
-                                                <p>Lawyer &amp ceo</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="#"><i class="fa fa-facebook"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-rss" aria-hidden="true"></i></a>
-                                                    </li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-skype"
-                                                                aria-hidden="true"></i></a></li>
-                                                </ul>
-                                            </div>
                                         </div>
-                                    </div>
-
-                                    <div class="col-sm-4 col-xs-12">
-                                        <div class="teamContent text-center">
-                                            <div class="teamImage">
-                                                <img src="{{ asset('user/img/home/team1.jpg') }}" alt="img">
-                                                <div class="overlay">
-                                                    <a href="#"></a>
-                                                </div>
-                                            </div>
-                                            <div class="teamInfo">
-                                                <h3><a href="#">Amanda Stone</a></h3>
-                                                <p>Lawyer &amp ceo</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="#"><i class="fa fa-facebook"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-rss"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-skype"
-                                                                aria-hidden="true"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-sm-4 col-xs-12">
-                                        <div class="teamContent text-center">
-                                            <div class="teamImage">
-                                                <img src="{{ asset('user/img/home/team2.jpg') }}" alt="img">
-                                                <div class="overlay">
-                                                    <a href="#"></a>
-                                                </div>
-                                            </div>
-                                            <div class="teamInfo">
-                                                <h3><a href="#">Mark Brown</a></h3>
-                                                <p>Lawyer &amp ceo</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="#"><i class="fa fa-facebook"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-rss"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"
-                                                                aria-hidden="true"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-skype"
-                                                                aria-hidden="true"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>

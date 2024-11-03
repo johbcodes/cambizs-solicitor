@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\PracticeAreas;
+use App\Models\Profile;
 use App\Models\SolicitorServices;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -21,9 +23,16 @@ class PageController extends Controller
 
     public function practice_detail($name)
     {
-        $area = PracticeAreas::where('name', $name)->pluck('name')->first();
+        $area = PracticeAreas::where('name', $name)->first();
         $practiceAreas = PracticeAreas::all();
-        return view('practice-areas.detail', compact('area', 'practiceAreas'));
+        $solicitors = SolicitorServices::where('practice_area_id', $area->id)->get();
+
+        foreach ($solicitors as $solicitor) {
+            $solicitor->profile = Profile::where('user_id', $solicitor->solicitor_id)->first();
+            $solicitor->user = User::find($solicitor->solicitor_id);
+        }
+
+        return view('practice-areas.detail', compact('area', 'practiceAreas',  'solicitors'));
     }
     public function solicitors()
     {

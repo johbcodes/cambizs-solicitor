@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class SolicitorServices extends Model
 {
+    protected $fillable = [
+        'practice_area_id',
+        'solicitor_id',
+        'cost'
+    ];
     public function solicitor()
     {
         return $this->belongsTo(User::class);

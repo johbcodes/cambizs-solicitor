@@ -1,4 +1,11 @@
 @extends('layouts.app')
+@push('css')
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/tagify.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/tagify-data.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/quill.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/select2.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/select2-theme.min.css') }}">
+@endpush
 @section('content')
     <!-- [ page-header ] start -->
     <div class="page-header">
@@ -40,18 +47,9 @@
                 <div class="card stretch stretch-full">
                     <div class="card-body">
                         <div class="mb-4">
-                            <label class="form-label">Subject <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="Subject">
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label">Related <span class="text-danger">*</span></label>
-                            <select class="form-control" data-select2-selector="icon">
-                                <option value="lead" data-icon="feather-at-sign">Lead</option>
-                                <option value="coustomer" data-icon="feather-users">Coustomer</option>
-                            </select>
-                        </div>
-                        <div class="mb-4">
-                            <label class="form-label">Lead <span class="text-danger">*</span></label>
+                            <label class="form-label">Choose Practice Areas
+                                <span class="text-danger">*</span>
+                            </label>
                             <select class="form-select" data-select2-selector="user">
                                 <option value="1" data-user="1">Alexandra Della - Website design and development
                                 </option>
@@ -65,6 +63,14 @@
                                 </option>
                             </select>
                         </div>
+                        <div class="mb-4">
+                            <label class="form-label">Related <span class="text-danger">*</span></label>
+                            <select class="form-control" data-select2-selector="icon">
+                                <option value="lead" data-icon="feather-at-sign">Lead</option>
+                                <option value="coustomer" data-icon="feather-users">Coustomer</option>
+                            </select>
+                        </div>
+
                         <div class="mb-4">
                             <label class="form-label">Discount </label>
                             <select class="form-select" data-select2-selector="default">
@@ -131,8 +137,6 @@
     </div>
 @endsection
 @push('js')
-    <script src="{{ asset('assets/vendors/js/vendors.min.js') }}"></script>
-    <!-- vendors.min.js {always must need to be top} -->
     <script src="{{ asset('assets/vendors/js/tagify.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/tagify-data.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/quill.min.js') }}"></script>

@@ -188,7 +188,7 @@ function vendorsInit() {
 */
 function browserSyncInit(done) {
     browserSync.init({
-        proxy: "http://solicitor.dev",
+        proxy: "http://127.0.0.1:8000/",
     });
     done();
 }
@@ -203,7 +203,7 @@ function reloadSyncInit(done) {
 <--!----------------------------------------------------------------!-->
 */
 function watchInit() {
-    watch("src/templates/**/*", series(htmlInit, reloadSyncInit)); // watch HTML template files
+    // watch("src/templates/**/*", series(htmlInit, reloadSyncInit)); // watch HTML template files
     watch(
         "resources/scss/bootstrap/**/*",
         series(bootstrapSCSSInit, reloadSyncInit)
@@ -222,7 +222,7 @@ function watchInit() {
 exports.default = series(
     cleanInit,
     series(
-        htmlInit,
+        // htmlInit,
         bootstrapSCSSInit,
         customSCSSInit,
         imagesInit,

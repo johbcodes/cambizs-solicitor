@@ -1,66 +1,131 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Cambizs Solicitor Project
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a front-end build setup for the Cambizs Solicitor website, using Gulp for task automation. It includes tools for compiling Sass, optimizing files, and live-reloading during development.
 
-## About Laravel
+## Features
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+-   **Sass Compilation**: Compiles SCSS files to CSS.
+-   **BrowserSync**: Provides live-reloading during development.
+-   **File Optimization**: Minifies CSS, JavaScript, and other files for production.
+-   **Modular Structure**: Organized with a task-based Gulp setup for easy maintenance and scalability.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Prerequisites
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+-   **Node.js**: Make sure you have [Node.js](https://nodejs.org/) installed.
+-   **Ruby**: Required to use some Sass packages. Download it from [Ruby Installer](https://rubyinstaller.org/).
+-   **Gulp CLI**: You can install Gulp globally if it's not already installed:
 
-## Learning Laravel
+    ```bash
+    npm install -g gulp-cli
+    ```
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## Getting Started
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 1. Clone the Repository
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Clone the project repository to your local machine:
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/yourusername/cambizs-solicitor.git
+cd cambizs-solicitor
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 2. Install Dependencies
 
-### Premium Partners
+Install the necessary npm packages:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+```
+npm install
+```
 
-## Contributing
+### 3. Install Ruby and Sass
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+If you don't already have Ruby installed, download it from Ruby Installer.
 
-## Code of Conduct
+After installing Ruby, install the Sass package:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+```
+gem install sass
+```
 
-## Security Vulnerabilities
+### 4. Run Gulp Tasks
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+To start development with live-reloading:
+
+```
+gulp
+```
+
+This command will:
+
+-   Clean the dist directory.
+
+-   Compile SCSS files from resources/scss to minified CSS files in public/assets/css.
+
+-   Minify JavaScript files from resources/js to public/assets/js.
+
+-   Copy and optimize images from resources/images to public/assets/images.
+
+-   Copy and optimize vendor files from resources/vendors to public/assets/vendors.
+
+-   Start a local server with BrowserSync for live-reloading.
+
+### 5. Build for Production
+
+To build and optimize files for production:
+
+```
+gulp
+```
+
+This command performs the same tasks as above, ensuring all files are optimized for deployment.
+
+### Gulp Task Structure
+
+The Gulp tasks are organized to process files from the resources folder and output them to the public folder. Here’s a breakdown of the main tasks:
+
+-   cleanInit: Deletes the dist directory to start with a clean state.
+-   bootstrapSCSSInit: Compiles Bootstrap SCSS files, autoprefixes, and minifies them.
+-   customSCSSInit: Compiles custom SCSS files, autoprefixes, and minifies them.
+-   imagesInit: Copies images from resources/images to public/assets/images.
+-   jsInit: Minifies JavaScript files from resources/js to public/assets/js.
+-   vendorsInit: Processes vendor CSS, JS, images, and fonts.
+
+## File Structure
+
+-   resources/ - Contains source files to be processed by Gulp.
+
+-   scss/ - SCSS files for stylesheets.
+
+-   js/ - JavaScript files.
+
+-   images/ - Image assets.
+
+-   vendors/ - Third-party CSS, JS, and fonts.
+
+-   public/ - Contains processed files ready for deployment.
+
+-   assets/css/ - Compiled and minified CSS files.
+-   assets/js/ - Minified JavaScript files.
+-   assets/images/ - Optimized images.
+-   assets/vendors/ - Minified and optimized vendor files.
+
+## Troubleshooting
+
+If you encounter issues with Gulp not running, ensure all prerequisites are installed.
+
+Make sure Ruby is installed and available in your system's PATH if you need to use Ruby Sass.
+
+If you encounter errors with certain plugins, try reinstalling them with npm install.
+
+## Additional Notes
+
+To modify the local server's proxy URL, update the proxy option in the browserSyncInit task in the gulpfile.cjs.
+
+Customize paths in the gulpfile.cjs to suit your project's file structure if needed.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+This README provides a clear, step-by-step guide for setting up and running the project, a

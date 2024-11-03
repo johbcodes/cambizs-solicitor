@@ -171,9 +171,10 @@
                                 <img src="{{ asset('assets/images/avatar/1.png') }}" alt="user-image"
                                     class="img-fluid user-avtar" />
                                 <div>
-                                    <h6 class="text-dark mb-0">Alexandra Della <span
-                                            class="badge bg-soft-success text-success ms-1">PRO</span></h6>
-                                    <span class="fs-12 fw-medium text-muted">alex.della@outlook.com</span>
+                                    <h6 class="text-dark mb-0">{{ Auth::user()->name }} <span
+                                            class="badge bg-soft-success text-success ms-1">{{ Auth::user()->getRoleNames()[0] }}
+                                        </span></h6>
+                                    <span class="fs-12 fw-medium text-muted">{{ Auth::user()->email }} </span>
                                 </div>
                             </div>
                         </div>

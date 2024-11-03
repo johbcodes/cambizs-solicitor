@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PracticeAreas;
+use App\Models\SolicitorServices;
 use Illuminate\Http\Request;
 
 class PageController extends Controller
@@ -14,13 +15,15 @@ class PageController extends Controller
     }
     public function practice()
     {
-        return view('practice-all');
+        $practiceAreas = PracticeAreas::all();
+        return view('practice-areas.index', compact('practiceAreas'));
     }
 
-    public function practice_detail($area)
+    public function practice_detail($name)
     {
-        $area = PracticeAreas::where('name', $area)->pluck('name')->first();
-        return view('practice-detail', compact('area'));
+        $area = PracticeAreas::where('name', $name)->pluck('name')->first();
+        $practiceAreas = PracticeAreas::all();
+        return view('practice-areas.detail', compact('area', 'practiceAreas'));
     }
     public function solicitors()
     {
@@ -43,7 +46,7 @@ class PageController extends Controller
     public function show($id)
     {
         // Retrieve the solicitor by id along with their related services and reviews
-        $solicitor = Solicitor::with(['services', 'reviews'])->findOrFail($id);
+        $solicitor = SolicitorServices::with(['services', 'reviews'])->findOrFail($id);
 
         // Pass the solicitor data to the view
         return view('solicitor.profile', compact('solicitor'));

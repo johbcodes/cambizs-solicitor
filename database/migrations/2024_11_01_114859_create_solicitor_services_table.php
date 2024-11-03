@@ -14,10 +14,11 @@ return new class extends Migration
         Schema::create('solicitor_services', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('cost');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('solicitor_id');
+            $table->unsignedBigInteger('practice_area_id');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('solicitor_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('practice_area_id')->references('id')->on('practice_areas')->onDelete('cascade');
         });
     }
 

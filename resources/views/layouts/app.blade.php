@@ -14,6 +14,11 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/vendors.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/vendors/css/daterangepicker.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/theme.min.css') }}" />
+    <style>
+        div.main-content {
+            min-height: 90vh !important;
+        }
+    </style>
     @stack('css')
     <!--! HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries !-->
     <!--! WARNING: Respond.js doesn"t work if you view the page via file: !-->
@@ -26,13 +31,10 @@
 <body>
     @include('layouts.sidebar')
     @include('layouts.header')
-    {{-- @include('layouts.nav') --}}
+
     <main class="nxl-container">
         <div class="nxl-content">
-            @include('layouts.page_header')
-
             @yield('content')
-
             <footer class="footer">
                 <p class="fs-11 text-muted fw-medium text-uppercase mb-0 copyright">
                     <span>Copyright ©</span>
@@ -56,7 +58,7 @@
     <script src="{{ asset('assets/vendors/js/circle-progress.min.js') }}"></script>
     <script src="{{ asset('assets/js/common-init.min.js') }}"></script>
     <script src="{{ asset('assets/js/dashboard-init.min.js') }}"></script>
-    <script src="{{ asset('assets/js/theme-customizer-init.min.js') }}"></script>
+    @stack('js')
 </body>
 
 </html>

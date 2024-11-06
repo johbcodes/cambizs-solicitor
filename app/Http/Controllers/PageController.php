@@ -31,7 +31,7 @@ class PageController extends Controller
             $solicitor->profile = Profile::where('user_id', $solicitor->solicitor_id)->first();
             $solicitor->user = User::find($solicitor->solicitor_id);
         }
-
+        // dd($solicitors);
         return view('practice-areas.detail', compact('area', 'practiceAreas',  'solicitors'));
     }
     public function solicitors()

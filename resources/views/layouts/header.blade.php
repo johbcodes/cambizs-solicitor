@@ -40,8 +40,8 @@
                 <div class="nxl-lavel-mega-menu-wrapper d-flex gap-3">
                     <!--! [Start] nxl-h-item nxl-mega-menu !-->
                     <div class="dropdown nxl-h-item nxl-mega-menu">
-                        <a href="javascript:void(0);" class="" data-bs-toggle="dropdown"
-                            data-bs-auto-close="outside"> Home </a>
+                        <a href="/" class=""> Home
+                        </a>
                     </div>
                     <!--! [End] nxl-h-item nxl-mega-menu !-->
                 </div>

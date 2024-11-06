@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PageController::class, 'index']);
 Route::get('/practice-areas', [PageController::class, 'practice'])->name('areas');
 Route::get('/practice-areas/{name}', [PageController::class, 'practice_detail'])->name('areas.detail');
+Route::get('/practice-areas/solicitor/{id}', [PageController::class, 'practice_solicitor'])->name('areas.solicitor');
 Route::get('/solicitors', [PageController::class, 'index'])->name('solicitors');
 Route::get('/solicitor/profile/{id}', [PageController::class, 'show'])->name('solicitor.profile');
 Route::get('/solicitor/{id}/request-service', [PageController::class, 'requestService'])->name('solicitor.request.service');
@@ -45,6 +46,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/practice-areas', [SolicitorController::class, 'storePracticeAreas'])->name('practice_areas.store');
         Route::get('/practice-areas/create', [SolicitorController::class, 'createPracticeAreas'])->name('practice_areas.create');
         Route::get('/messages', [SolicitorController::class, 'messages'])->name('messages');
+        Route::patch('/profile', [SolicitorController::class, 'updateProfile'])->name('update_profile');
     });
 
     // OTP Routes

@@ -52,6 +52,12 @@ class User extends Authenticatable
         return $this->hasMany(SolicitorServices::class);
     }
 
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+
     public function service_requests()
     {
         return $this->hasMany(ServiceRequest::class);

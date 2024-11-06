@@ -53,6 +53,7 @@
     <!--! BEGIN: Theme Customizer  !-->
     <script src="{{ asset('assets/js/theme-customizer-init.min.js') }}"></script>
     <!--! END: Theme Customizer !-->
+    @stack('js')
 </body>
 
 </html>

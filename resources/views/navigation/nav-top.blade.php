@@ -48,10 +48,10 @@
 
                                  @foreach ($practiceAreas->take(3) as $data)
                                      <li><a
-                                             href="{{ route('areas.detail', $data->name) }}">{{ ucwords($data->name) }}</a>
+                                             href="{{ route('practice.detail', $data->name) }}">{{ ucwords($data->name) }}</a>
                                      </li>
                                  @endforeach
-                                 <li><a href="{{ route('areas') }}">View more ...</a></li>
+                                 <li><a href="{{ route('practice') }}">View more ...</a></li>
                              </ul>
                          </li>
 

@@ -8,7 +8,7 @@
 @endpush
 @section('content')
     <!-- [ page-header ] start -->
-    <form action="{{ route('solicitor.practice_areas.store') }}" method="POST">
+    <form action="{{ route('solicitor.practiceArea.store') }}" method="POST">
         @csrf
         <div class="page-header flex-sm-wrap">
             <div class="page-header-left d-flex align-items-center d-sm-block d-md-flex">
@@ -22,7 +22,7 @@
             </div>
             <div class="page-header-right ms-auto">
                 <div class="d-flex align-items-center gap-3 page-header-right-items-wrapper">
-                    <a href="{{ route('solicitor.practice_areas.index') }}" class="text-danger">Cancel</a>
+                    <a href="{{ route('solicitor.serviceRequests') }}" class="text-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">
                         <i class="feather-save me-2"></i>
                         <span>Save Changes</span>

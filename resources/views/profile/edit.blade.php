@@ -138,7 +138,7 @@
                         </div>
                         <div class="tab-pane fade" id="solicitorTab" role="tabpanel">
                             <div class="card-body personal-info">
-                                <form method="POST" action="{{ route('solicitor.update_profile') }}"
+                                <form method="POST" action="{{ route('solicitor.profile.update') }}"
                                     enctype="multipart/form-data">
                                     @csrf
                                     @method('patch')
@@ -359,24 +359,24 @@
                     }
                 });
 
-                const bgInput = document.getElementById('bgInput');
-                const bgPreview = document.getElementById('bgPreview');
-                const bgUploadButton = document.querySelector('.bg-upload-button');
+                // const bgInput = document.getElementById('bgInput');
+                // const bgPreview = document.getElementById('bgPreview');
+                // const bgUploadButton = document.querySelector('.bg-upload-button');
 
-                bgUploadButton.addEventListener('click', function() {
-                    bgInput.click();
-                });
+                // bgUploadButton.addEventListener('click', function() {
+                //     bgInput.click();
+                // });
 
-                bgInput.addEventListener('change', function() {
-                    const file = bgInput.files[0];
-                    if (file && file.type.startsWith('image/')) {
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            bgPreview.src = e.target.result;
-                        };
-                        reader.readAsDataURL(file);
-                    }
-                });
+                // bgInput.addEventListener('change', function() {
+                //     const file = bgInput.files[0];
+                //     if (file && file.type.startsWith('image/')) {
+                //         const reader = new FileReader();
+                //         reader.onload = function(e) {
+                //             bgPreview.src = e.target.result;
+                //         };
+                //         reader.readAsDataURL(file);
+                //     }
+                // });
 
                 // Password Strength Indicator
                 const newPasswordInput = document.getElementById('newPassword');

@@ -13,16 +13,20 @@ use Illuminate\Support\Facades\Validator;
 
 class SolicitorController extends Controller
 {
-    public function getPracticeAreas()
+    public function listPracticeAreas()
     {
         return view('solicitor.practice-areas.index');
     }
-    public function createPracticeAreas()
+    public function createPracticeArea()
     {
         $practiceAreas = PracticeAreas::all();
         return view('solicitor.practice-areas.create', compact('practiceAreas'));
     }
-    public function storePracticeAreas(Request $request)
+    public function listServiceRequests()
+    {
+        return view('solicitor.practice-areas.index');
+    }
+    public function storePracticeArea(Request $request)
     {
         $validator = Validator::make($request->all(), [
             'practice_area_id' => 'required|exists:practice_areas,id',
@@ -58,7 +62,7 @@ class SolicitorController extends Controller
             'solicitor_id' => Auth::user()->id,
         ]);
 
-        return redirect()->route('solicitor.practice_areas.index')->with('success', 'Service created successfully.');
+        return redirect()->route('solicitor.practiceAreas')->with('success', 'Service created successfully.');
     }
     public function updateProfile(Request $request): RedirectResponse
     {

@@ -20,7 +20,8 @@
                                             <i class="icon-avatar-family"></i>
                                             <h4><a href="#">{{ ucwords($data->name) }}</a></h4>
                                             <p>{{ $data->description }}</p>
-                                            <a href="{{ route('areas.detail', $data->name) }}" class="btn btn-border">learn
+                                            <a href="{{ route('practice.detail', $data->name) }}"
+                                                class="btn btn-border">learn
                                                 more</a>
                                         </div>
                                     </div>

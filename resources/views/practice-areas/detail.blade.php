@@ -122,11 +122,14 @@
                                                 <div class="teamImage">
                                                     <img src="{{ asset('user/img/home/team4.jpg') }}" alt="img">
                                                     <div class="overlay">
-                                                        <a href="#"></a>
+                                                        <a
+                                                            href="{{ route('practice.solicitor', $solicitor->user->id) }}"></a>
                                                     </div>
                                                 </div>
                                                 <div class="teamInfo">
-                                                    <h3><a href="#">{{ $solicitor->user->name }}</a></h3>
+                                                    <h3><a
+                                                            href="{{ route('practice.solicitor', $solicitor->user->id) }}">{{ $solicitor->user->name }}</a>
+                                                    </h3>
                                                     <p>Lawyer &amp ceo</p>
                                                     <ul class="list-inline">
                                                         <li><a href="#"><i class="fa fa-facebook"

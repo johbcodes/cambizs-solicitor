@@ -1,155 +1,158 @@
 @extends('navigation.master')
 
+<style>
+    /* Custom styles */
+    .profile-card {
+        background-color: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .profile-card img {
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+    }
+
+    .request-btn {
+        background-color: #f9a825;
+        color: #ffffff;
+        font-weight: 600;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    .request-btn:hover {
+        background-color: #e68a00;
+    }
+
+    .service-card,
+    .review-card {
+        background-color: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+</style>
+
 @section('content')
-    <!-- MAIN SECTION -->
     <section class="whiteSection commonSection clearfix">
-        <div class="container">
-            <div class="main-content reverse">
-                <div class="row">
+        <div class="container my-5">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="profile-card"
+                        style="position: relative; padding: 40px 30px; background-color: rgba(255, 255, 255, 0.95); border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+                        <div
+                            style="background-image: url('{{ $solicitor->profile->background_image ? asset('storage/' . $solicitor->profile->background_image) : asset('assets/images/default-background.jpg') }}'); background-size: cover; background-position: center; position: absolute; top: 0; left: 0; right: 0; bottom: 0; opacity: 0.15; border-radius: 10px;">
+                        </div>
 
-                    <div class="col-md-3 col-sm-4 col-xs-12">
-                        <div class="sidebar">
+                        <div style="position: relative; z-index: 2;">
+                            <img src="{{ $solicitor->avatar ? asset('storage/' . $solicitor->avatar) : asset('assets/images/avatar/1.png') }}"
+                                alt="Solicitor Photo"
+                                style="border-radius: 50%; border: 3px solid #ffffff; width: 120px; height: 120px; margin-bottom: 15px;">
+                            <h2 style="margin-top: 15px; color: #333; font-size: 1.8rem;">{{ $solicitor->name }}</h2>
+                            <p style="color: #555; font-size: 1rem; margin-bottom: 5px;">{{ $solicitor->profile->location }}
+                            </p>
+                            <p style="color: #777; font-size: 0.95rem; margin-bottom: 20px;">{{ $solicitor->profile->bio }}
+                            </p>
 
-                            <div class="block">
-                                <h3>Search</h3>
-                                <div class="block-inner">
-                                    <ul class="list-unstyled sideNav">
-                                        <li>
-                                            <form action="#" method="POST" role="form">
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="title"
-                                                        placeholder="Title">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="location"
-                                                        placeholder="Location">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="text" class="form-control" name="specialty"
-                                                        placeholder="Specialty">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="number" class="form-control" name="fee"
-                                                        placeholder="Fee">
-                                                </div>
-                                                <div class="form-group">
-                                                    <input type="number" class="form-control" name="rating"
-                                                        placeholder="Rating">
-                                                </div>
-                                            </form>
-                                        </li>
-
-                                    </ul>
+                            @if ($solicitor->profile->video_link)
+                                <div class="mt-3 mb-3" style="margin: 1rem">
+                                    <button type="button" class="btn btn-default" data-toggle="modal"
+                                        data-target="#videoModal"
+                                        style="padding: 12px 20px; border-radius: 8px; font-weight: 500; color: #ffffff; background:rgba(59, 59, 59, 0.301)">
+                                        <i class="fa fa-play-circle" style="margin-right: 8px;"></i> Watch Introduction
+                                        Video
+                                    </button>
                                 </div>
-                            </div>
-                            <div class="block">
-                                <a href="#" class="btn btn-common btn-full-round btn-theme">Apply Filter</a>
-                            </div>
+                            @endif
 
+                            <a href="{{ route('client.serviceRequest.submit', ['solicitor' => $solicitor->id]) }}"
+                                class="btn btn-primary mt-3"
+                                style="padding: 12px 25px; border-radius: 8px; font-weight: 600; margin-right: 10px;">
+                                Request Service
+                            </a>
+
+                            <a href="{{ route('chat.start', $solicitor->id) }}" class="btn btn-secondary mt-3"
+                                style="padding: 12px 25px; border-radius: 8px; font-weight: 600;">
+                                Message Solicitor
+                            </a>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="col-md-9 col-sm-8 col-xs-12">
-                        <div class="primary-content">
-                            <div class="practice-content">
-                                {{-- <img class="title-img img-responsive" src="{{ asset('user/img/practice/img-13.jpg') }}"
-                                    alt="Image"> --}}
-                                <div class="sectionTitle text-left">
-                                    <h2>{{ $area->name }}</h2>
-                                    <p>{{ $area->description }}.</p>
-                                    {{-- <div class="row">
-                                        <div class="col-sm-8 col-xs-12">
-                                            <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below
-                                                for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum
-                                                et Malorum" by Cicero are also reproduced in their exact original form,
-                                                accompanied by English versions from the 1914 translation by H. Rackham.</p>
-                                            <p>Since the 1500s is reproduced below for those interested. Sections 1.10.32
-                                                and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also
-                                                reproduced in their exact original form, accompanied by English </p>
-                                        </div>
-                                        <div class="col-sm-4 col-xs-12">
-                                            <img class="inner-img img-responsive"
-                                                src="{{ asset('user/img/practice/img-14.jpg') }}" alt="Image">
-                                        </div>
-                                    </div> --}}
-                                </div>
-                                {{-- <div class="collapse navbar-collapse navbar-ex1-collapse content-collapse">
-                                    <ul class="nav navbar-nav collapse-nav">
-                                        <li>
-                                            <a class="collapsed" href="javascript:;" data-toggle="collapse"
-                                                data-target="#collapse1" aria-expanded="true">Where can i get some? <i
-                                                    class="fa fa-minus"></i></a>
-                                            <div id="collapse1" class="collapse collapseItem in">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using Lorem Ipsum is that it has a more-or-less normal distribution of
-                                                    letters, as opposed to using 'Content here, content here.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a class="collapsed" href="javascript:;" data-toggle="collapse"
-                                                data-target="#collapse2">Why do we use it?<i class="fa fa-plus"></i></a>
-                                            <div id="collapse2" class="collapse collapseItem">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using Lorem Ipsum is that it has a more-or-less normal distribution of
-                                                    letters, as opposed to using 'Content here, content here.</p>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <a class="collapsed" href="javascript:;" data-toggle="collapse"
-                                                data-target="#collapse3">Where can I get some?<i class="fa fa-plus"></i></a>
-                                            <div id="collapse3" class="collapse collapseItem">
-                                                <p>It is a long established fact that a reader will be distracted by the
-                                                    readable content of a page when looking at its layout. The point of
-                                                    using Lorem Ipsum is that it has a more-or-less normal distribution of
-                                                    letters, as opposed to using 'Content here, content here.</p>
-                                            </div>
-                                        </li>
 
-                                    </ul>
-                                </div> --}}
-                            </div>
-
-                            <div class="teamSection padding-topLarge">
-                                <div class="sectionTitle text-left">
-                                    <h2>Attorneys in this area</h2>
-                                </div>
-                                <div class="row">
-                                    @foreach ($solicitors as $solicitor)
-                                        <div class="col-sm-4 col-xs-12">
-                                            <div class="teamContent text-center">
-                                                <div class="teamImage">
-                                                    <img src="{{ asset('user/img/home/team4.jpg') }}" alt="img">
-                                                    <div class="overlay">
-                                                        <a href="#"></a>
-                                                    </div>
-                                                </div>
-                                                <div class="teamInfo">
-                                                    <h3><a href="#">{{ $solicitor->user->name }}</a></h3>
-                                                    <p>Lawyer &amp ceo</p>
-                                                    <ul class="list-inline">
-                                                        <li><a href="#"><i class="fa fa-facebook"
-                                                                    aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-twitter"
-                                                                    aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-rss"
-                                                                    aria-hidden="true"></i></a>
-                                                        </li>
-                                                        <li><a href="#"><i class="fa fa-linkedin"
-                                                                    aria-hidden="true"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-skype"
-                                                                    aria-hidden="true"></i></a></li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+            <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="videoModalLabel">Introduction Video</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="{{ $solicitor->profile->video_link }}"
+                                    allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <ul class="nav nav-tabs mt-4" id="profileTabs" role="tablist">
+                <li class="active">
+                    <a href="#services" data-toggle="tab" role="tab">Services Offered</a>
+                </li>
+                <li>
+                    <a href="#reviews" data-toggle="tab" role="tab">Reviews</a>
+                </li>
+            </ul>
+
+            <div class="tab-content mt-4" id="profileTabContent">
+                <div class="tab-pane fade in active" id="services" role="tabpanel">
+                    <div class="row">
+                        @foreach ($areas as $practiceArea)
+                            <div class="col-md-6 mb-4" style="margin-top: 1rem">
+                                <div class="service-card">
+                                    <h5>{{ $practiceArea->name }}</h5>
+                                    <p>{{ $practiceArea->description }}</p>
+                                    <button class="btn">Request Service</button>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="reviews" role="tabpanel">
+                    <div class="row">
+                        @foreach ($reviews as $review)
+                            <div class="col-md-6 mb-4">
+                                <div class="review-card">
+                                    <h5>{{ $review->sender }}</h5>
+                                    <p>"{{ $review->comment }}"</p>
+                                    @if ($review->comments->isNotEmpty())
+                                        <ul>
+                                            @foreach ($review->comments as $comment)
+                                                <li>{{ $comment->content }} - <strong>{{ $comment->sender }}</strong>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    @endif
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>

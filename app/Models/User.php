@@ -6,12 +6,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Musonza\Chat\Traits\Messageable;
 use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, Messageable;
 
     /**
      * The attributes that are mass assignable.
@@ -49,8 +50,14 @@ class User extends Authenticatable
 
     public function solicitor_services()
     {
-        return $this->hasMany(SolicitorServices::class);
+        return $this->hasMany(SolicitorServices::class, 'solicitor_id');
     }
+
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
 
     public function service_requests()
     {

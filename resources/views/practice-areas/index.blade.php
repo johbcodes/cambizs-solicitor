@@ -19,9 +19,9 @@
                                         <div class="overlayInfo">
                                             <i class="icon-avatar-family"></i>
                                             <h4><a href="#">{{ ucwords($data->name) }}</a></h4>
-                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                                tempor incididunt ut labore.</p>
-                                            <a href="{{ route('areas.detail', $data->name) }}" class="btn btn-border">learn
+                                            <p>{{ $data->description }}</p>
+                                            <a href="{{ route('practice.detail', $data->name) }}"
+                                                class="btn btn-border">learn
                                                 more</a>
                                         </div>
                                     </div>

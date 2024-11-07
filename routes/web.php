@@ -2,64 +2,77 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\OtpController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SolicitorController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-// Public Routes
-Route::get('/', [PageController::class, 'index']);
-Route::get('/practice-areas', [PageController::class, 'practice'])->name('areas');
-Route::get('/practice-areas/{name}', [PageController::class, 'practice_detail'])->name('areas.detail');
-Route::get('/solicitors', [PageController::class, 'index'])->name('solicitors');
-Route::get('/solicitor/profile/{id}', [PageController::class, 'show'])->name('solicitor.profile');
-Route::get('/solicitor/{id}/request-service', [PageController::class, 'requestService'])->name('solicitor.request.service');
+Route::get('/', [PageController::class, 'index'])->name('home');
+Route::get('/practice-areas', [PageController::class, 'practice'])->name('practice');
+Route::get('/practice-areas/{name}', [PageController::class, 'practiceDetail'])->name('practice.detail');
+Route::get('/practice-areas/solicitor/{id}', [PageController::class, 'solicitorProfile'])->name('practice.solicitor');
+Route::get('/solicitors', [PageController::class, 'listSolicitors'])->name('solicitors');
+Route::get('/solicitor/{id}/profile', [PageController::class, 'showSolicitorProfile'])->name('solicitor.profile');
+Route::get('/solicitor/{id}/request-service', [PageController::class, 'requestService'])->name('solicitor.request');
 Route::get('/solicitor/{id}/contact', [PageController::class, 'contactSolicitor'])->name('solicitor.contact');
-Route::get('/solicitor/{id}/contract', [PageController::class, 'createContract'])->name('solicitor.contract.create');
+Route::get('/solicitor/{id}/start-contract', [PageController::class, 'createContract'])->name('solicitor.contract');
 
-// Dashboard Route
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified', 'otp.check'])->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified', 'otp.check'])->name('dashboard');
 
-// Authenticated Routes
 Route::middleware('auth')->group(function () {
 
-    // Admin Routes
+    // Route::prefix('messages')->as('messages.')->group(function () {
+    //     Route::get('/', [DashboardController::class, 'listMessages'])->name('index');
+    //     Route::get('/new/{recipient}', [DashboardController::class, 'createMessage'])->name('create');
+    // });
+
+    Route::prefix('chat')->group(function () {
+        Route::get('/', [ChatController::class, 'allMessages'])->name('chat');
+        Route::get('/start/{solicitor}', [ChatController::class, 'startConversation'])->name('chat.start');
+        Route::get('/conversation/{id}', [ChatController::class, 'showConversation'])->name('chat.conversation');
+        Route::post('/conversation/{id}/send', [ChatController::class, 'sendMessage'])->name('chat.send');
+    });
+
     Route::prefix('admin')->as('admin.')->group(function () {
-        Route::get('/service-requests', [AdminController::class, 'getServiceRequests'])->name('service.requests.index');
-        Route::get('/users', [AdminController::class, 'users'])->name('users');
+        Route::get('/service-requests', [AdminController::class, 'listServiceRequests'])->name('serviceRequests');
+        Route::get('/users', [AdminController::class, 'listUsers'])->name('users');
         Route::get('/settings', [AdminController::class, 'settings'])->name('settings');
+        Route::get('/messages', [AdminController::class, 'listMessages'])->name('messages'); // Admin message logs
     });
 
-    // Client Routes
     Route::prefix('client')->as('client.')->group(function () {
-        Route::get('/service-requests', [UserController::class, 'getServiceRequests'])->name('service.requests.index');
+        Route::get('/service-requests', [UserController::class, 'listServiceRequests'])->name('serviceRequests');
+        Route::post('/service-requests', [UserController::class, 'storeServiceRequest'])->name('serviceRequests.store');
+        Route::get('/service-requests/submit/{solicitor}', [UserController::class, 'createServiceRequest'])->name('serviceRequest.submit');
     });
 
-    // Solicitor Routes
+
+
     Route::prefix('solicitor')->as('solicitor.')->group(function () {
-        Route::get('/service-requests', [SolicitorController::class, 'getServiceRequests'])->name('service.requests.index');
-        Route::get('/practice-areas', [SolicitorController::class, 'getPracticeAreas'])->name('practice_areas.index');
-        Route::post('/practice-areas', [SolicitorController::class, 'storePracticeAreas'])->name('practice_areas.store');
-        Route::get('/practice-areas/create', [SolicitorController::class, 'createPracticeAreas'])->name('practice_areas.create');
-        Route::get('/messages', [SolicitorController::class, 'messages'])->name('messages');
+        Route::get('/service-requests', [SolicitorController::class, 'listServiceRequests'])->name('serviceRequests');
+        Route::get('/practice-areas', [SolicitorController::class, 'listPracticeAreas'])->name('practiceAreas');
+        Route::get('/practice-areas/create', [SolicitorController::class, 'createPracticeArea'])->name('practiceArea.create');
+        Route::post('/practice-areas', [SolicitorController::class, 'storePracticeArea'])->name('practiceArea.store');
+        Route::get('/profile/messages', [SolicitorController::class, 'listMessages'])->name('messages');
+        Route::patch('/profile', [SolicitorController::class, 'updateProfile'])->name('profile.update');
     });
 
-    // OTP Routes
-    Route::get('/otp/verify', [OtpController::class, 'showVerificationForm'])->name('otp.verify');
-    Route::post('/otp/verify', [OtpController::class, 'verifyOtp'])->name('otp.verify.submit');
-    Route::post('/otp/resend', [OtpController::class, 'resendOtp'])->name('otp.resend');
+    Route::prefix('otp')->as('otp.')->group(function () {
+        Route::get('/verify', [OtpController::class, 'showVerificationForm'])->name('verify');
+        Route::post('/verify', [OtpController::class, 'verifyOtp'])->name('verify.submit');
+        Route::post('/resend', [OtpController::class, 'resendOtp'])->name('resend');
+    });
 
-    // Profile Routes
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('profile')->as('profile.')->group(function () {
+        Route::get('/edit', [ProfileController::class, 'edit'])->name('edit');
+        Route::patch('/update', [ProfileController::class, 'update'])->name('update');
+        Route::delete('/delete', [ProfileController::class, 'destroy'])->name('destroy');
+    });
 
-    // Help Route
-    Route::get('/help', [PageController::class, 'help'])->name('help');
+    Route::get('/help', [DashboardController::class, 'help'])->name('help');
 });
 
-// Auth routes
 require __DIR__ . '/auth.php';

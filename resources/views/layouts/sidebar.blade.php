@@ -21,19 +21,19 @@
                 </li>
 
                 @hasrole('Admin')
-                    <li class="nxl-item nxl-hasmenu">
+                    <li class="nxl-item nxl-hasmenu {{ Request::is('admin/users*') ? 'active' : '' }}">
                         <a href="{{ route('admin.users') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-users"></i></span>
                             <span class="nxl-mtext">Users</span>
                         </a>
                     </li>
                     <li class="nxl-item nxl-hasmenu {{ request()->is('admin/service-requests*') ? 'active' : '' }}">
-                        <a href="{{ route('admin.service.requests.index') }}" class="nxl-link">
+                        <a href="{{ route('admin.serviceRequests') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-user-check"></i></span>
                             <span class="nxl-mtext">Service Requests</span>
                         </a>
                     </li>
-                    <li class="nxl-item nxl-hasmenu">
+                    <li class="nxl-item nxl-hasmenu {{ Request::is('admin/settings*') ? 'active' : '' }}">
                         <a href="{{ route('admin.settings') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-settings"></i></span>
                             <span class="nxl-mtext">Settings</span>
@@ -42,41 +42,34 @@
                 @endhasrole
 
                 @hasrole('Solicitor')
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="{{ route('solicitor.practice_areas.index') }}" class="nxl-link">
+                    <li class="nxl-item nxl-hasmenu {{ Request::is('practice-areas*') ? 'active' : '' }}">
+                        <a href="{{ route('solicitor.practiceAreas') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-grid"></i></span>
                             <span class="nxl-mtext">Practice Areas</span>
                         </a>
                     </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="{{ route('solicitor.service.requests.index') }}" class="nxl-link">
+                    <li class="nxl-item nxl-hasmenu {{ Request::is('service-requests*') ? 'active' : '' }}">
+                        <a href="{{ route('solicitor.serviceRequests') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-hash"></i></span>
                             <span class="nxl-mtext">Service Requests</span>
-                        </a>
-                    </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="{{ route('solicitor.messages') }}" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-message-circle"></i></span>
-                            <span class="nxl-mtext">Messages</span>
                         </a>
                     </li>
                 @endhasrole
 
                 @hasrole('Client')
                     <li class="nxl-item nxl-hasmenu">
-                        <a href="{{ route('client.service.requests.index') }}" class="nxl-link">
+                        <a href="{{ route('client.serviceRequests') }}" class="nxl-link">
                             <span class="nxl-micon"><i class="feather-user-check"></i></span>
                             <span class="nxl-mtext">Service Requests</span>
                         </a>
                     </li>
-                    <li class="nxl-item nxl-hasmenu">
-                        <a href="{{ route('solicitor.messages') }}" class="nxl-link">
-                            <span class="nxl-micon"><i class="feather-message-circle"></i></span>
-                            <span class="nxl-mtext">Messages</span>
-                        </a>
-                    </li>
                 @endhasrole
-
+                <li class="nxl-item nxl-hasmenu {{ Request::is('chat*') ? 'active' : '' }}">
+                    <a href="{{ route('chat') }}" class="nxl-link">
+                        <span class="nxl-micon"><i class="feather-message-circle"></i></span>
+                        <span class="nxl-mtext">Messages</span>
+                    </a>
+                </li>
                 <li class="nxl-item nxl-hasmenu">
                     <a href="{{ route('profile.edit') }}" class="nxl-link">
                         <span class="nxl-micon"><i class="feather-check-circle"></i></span>

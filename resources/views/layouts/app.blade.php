@@ -67,30 +67,47 @@
                 Swal.fire({
                     icon: 'success',
                     title: '{{ session('success') }}',
-                    position: 'bottom',
+                    position: 'top',
                     toast: true,
                     showConfirmButton: false,
                     timer: 3000,
                     timerProgressBar: true,
-                    onOpen: (toast) => {
+                    didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer);
                         toast.addEventListener('mouseleave', Swal.resumeTimer);
                     },
                 });
             @endif
 
-            // Check for error messages in session
+            // Check for specific error messages in session (like duplicate practice area error)
+            @if (session('error'))
+                Swal.fire({
+                    icon: 'error',
+                    title: '{{ session('error') }}',
+                    position: 'top',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 5000,
+                    timerProgressBar: true,
+                    didOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer);
+                        toast.addEventListener('mouseleave', Swal.resumeTimer);
+                    },
+                });
+            @endif
+
+            // Check for validation error messages in session
             @if ($errors->any())
                 Swal.fire({
                     icon: 'error',
                     title: 'Please correct the following errors:',
                     html: '<ul>@foreach ($errors->all() as $error)<li>{{ $error }}</li>@endforeach</ul>',
-                    position: 'bottom',
+                    position: 'top',
                     toast: true,
                     showConfirmButton: false,
                     timer: 5000,
                     timerProgressBar: true,
-                    onOpen: (toast) => {
+                    didOpen: (toast) => {
                         toast.addEventListener('mouseenter', Swal.stopTimer);
                         toast.addEventListener('mouseleave', Swal.resumeTimer);
                     },
@@ -98,8 +115,8 @@
             @endif
         });
     </script>
-    @stack('js')
 
+    @stack('js')
 </body>
 
 </html>

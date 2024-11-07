@@ -20,7 +20,7 @@
                     </a>
                 </div>
                 <div class="d-flex align-items-center gap-2">
-                    <a class="btn btn-md btn-primary" href="{{ route('solicitor.practice_areas.create') }}">
+                    <a class="btn btn-md btn-primary" href="{{ route('solicitor.practiceArea.create') }}">
                         <i class="feather-plus me-2"></i>
                         <span>Add Practice Area</span>
                     </a>

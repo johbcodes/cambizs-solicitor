@@ -10,4 +10,8 @@ class PracticeAreas extends Model
     {
         return $this->hasMany(ServiceRequest::class);
     }
+    public function solicitor_services()
+    {
+        return $this->hasMany(SolicitorServices::class);
+    }
 }

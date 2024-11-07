@@ -8,7 +8,7 @@
 @endpush
 @section('content')
     <!-- [ page-header ] start -->
-    <form action="{{ route('solicitor.practice_areas.store') }}" method="POST">
+    <form action="{{ route('solicitor.practiceArea.store') }}" method="POST">
         @csrf
         <div class="page-header flex-sm-wrap">
             <div class="page-header-left d-flex align-items-center d-sm-block d-md-flex">
@@ -22,7 +22,7 @@
             </div>
             <div class="page-header-right ms-auto">
                 <div class="d-flex align-items-center gap-3 page-header-right-items-wrapper">
-                    <a href="{{ route('solicitor.practice_areas.index') }}" class="text-danger">Cancel</a>
+                    <a href="{{ route('solicitor.serviceRequests') }}" class="text-danger">Cancel</a>
                     <button type="submit" class="btn btn-primary">
                         <i class="feather-save me-2"></i>
                         <span>Save Changes</span>
@@ -32,33 +32,38 @@
         </div>
         <div class="main-content">
             <div class="row">
-                <div class="col-xl-12">
+                <div class="col-12 col-md-8 col-xl-7 mx-auto">
                     <div class="card stretch stretch-full">
                         <div class="card-body">
-                            @csrf
-                            <div class="mb-4">
-                                <label class="form-label">Practice Areas
-                                    <span class="text-danger">*</span>
-                                </label>
-                                <select class="form-select" name="practice_area_id" required>
-                                    <option value="">Choose Practice Area</option>
-                                    @foreach ($practiceAreas as $area)
-                                        <option value="{{ $area->id }}"
-                                            data-city="{{ ['bg-primary', 'bg-secondary', 'bg-success', 'bg-warning', 'bg-info', 'bg-danger', 'bg-dark', 'bg-muted', 'bg-teal', 'bg-cyan', 'bg-indigo', 'bg-green', 'bg-red', 'bg-orange', 'bg-darken', 'bg-black'][array_rand(['bg-primary', 'bg-secondary', 'bg-success', 'bg-warning', 'bg-info', 'bg-danger', 'bg-dark', 'bg-muted', 'bg-teal', 'bg-cyan', 'bg-indigo', 'bg-green', 'bg-red', 'bg-orange', 'bg-darken', 'bg-black'])] }}">
-                                            {{ $area->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="mb-4">
-                                <div class="input-group">
-                                    <div class="input-group-text"><i class="feather-dollar-sign"></i></div>
-                                    <input type="text" class="form-control" id="VATInput" name="cost"
-                                        placeholder="Cost of service" required>
+                            <div class="row">
+                                <div class="mb-4">
+                                    <label class="form-label">Practice Areas
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <select class="form-select" name="practice_area_id" data-select2-selector="city"
+                                        required>
+                                        <option value="" data-city="bg-secondary" disabled selected>
+                                            Choose Practice Area</option>
+                                        @foreach ($practiceAreas as $area)
+                                            <option value="{{ $area->id }}"
+                                                data-city="{{ ['bg-primary', 'bg-secondary', 'bg-success', 'bg-warning', 'bg-info', 'bg-danger', 'bg-dark', 'bg-muted', 'bg-teal', 'bg-cyan', 'bg-indigo', 'bg-green', 'bg-red', 'bg-orange', 'bg-darken', 'bg-black'][array_rand(['bg-primary', 'bg-secondary', 'bg-success', 'bg-warning', 'bg-info', 'bg-danger', 'bg-dark', 'bg-muted', 'bg-teal', 'bg-cyan', 'bg-indigo', 'bg-green', 'bg-red', 'bg-orange', 'bg-darken', 'bg-black'])] }}">
+                                                {{ $area->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                <div class="mb-4">
+                                    <div class="input-group">
+                                        <div class="input-group-text"><i class="feather-dollar-sign"></i></div>
+                                        <input type="text" class="form-control" id="VATInput" name="cost"
+                                            placeholder="Cost of service" required>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -70,13 +75,8 @@
     <script src="{{ asset('assets/vendors/js/quill.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/select2.min.js') }}"></script>
     <script src="{{ asset('assets/vendors/js/select2-active.min.js') }}"></script>
-    <!--! END: Vendors JS !-->
-    <!--! BEGIN: Apps Init  !-->
     <script src="{{ asset('assets/js/common-init.min.js') }}"></script>
-    <!--! END: Apps Init !-->
-    <!--! BEGIN: Theme Customizer  !-->
-    <script src="{{ asset('assets/js/theme-customizer-init.min.js') }}"></script>
-    <!--! END: Theme Customizer !-->
+
     <script>
         $(document).ready(function() {
             var i = 1;

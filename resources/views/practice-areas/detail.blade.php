@@ -52,12 +52,12 @@
                     <div class="col-md-9 col-sm-8 col-xs-12">
                         <div class="primary-content">
                             <div class="practice-content">
-                                <img class="title-img img-responsive" src="{{ asset('user/img/practice/img-13.jpg') }}"
-                                    alt="Image">
+                                {{-- <img class="title-img img-responsive" src="{{ asset('user/img/practice/img-13.jpg') }}"
+                                    alt="Image"> --}}
                                 <div class="sectionTitle text-left">
                                     <h2>{{ $area->name }}</h2>
                                     <p>{{ $area->description }}.</p>
-                                    <div class="row">
+                                    {{-- <div class="row">
                                         <div class="col-sm-8 col-xs-12">
                                             <p>The standard chunk of Lorem Ipsum used since the 1500s is reproduced below
                                                 for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum
@@ -71,9 +71,9 @@
                                             <img class="inner-img img-responsive"
                                                 src="{{ asset('user/img/practice/img-14.jpg') }}" alt="Image">
                                         </div>
-                                    </div>
+                                    </div> --}}
                                 </div>
-                                <div class="collapse navbar-collapse navbar-ex1-collapse content-collapse">
+                                {{-- <div class="collapse navbar-collapse navbar-ex1-collapse content-collapse">
                                     <ul class="nav navbar-nav collapse-nav">
                                         <li>
                                             <a class="collapsed" href="javascript:;" data-toggle="collapse"
@@ -108,7 +108,7 @@
                                         </li>
 
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
 
                             <div class="teamSection padding-topLarge">
@@ -122,11 +122,14 @@
                                                 <div class="teamImage">
                                                     <img src="{{ asset('user/img/home/team4.jpg') }}" alt="img">
                                                     <div class="overlay">
-                                                        <a href="#"></a>
+                                                        <a
+                                                            href="{{ route('practice.solicitor', $solicitor->user->id) }}"></a>
                                                     </div>
                                                 </div>
                                                 <div class="teamInfo">
-                                                    <h3><a href="#">{{ $solicitor->user->name }}</a></h3>
+                                                    <h3><a
+                                                            href="{{ route('practice.solicitor', $solicitor->user->id) }}">{{ $solicitor->user->name }}</a>
+                                                    </h3>
                                                     <p>Lawyer &amp ceo</p>
                                                     <ul class="list-inline">
                                                         <li><a href="#"><i class="fa fa-facebook"
